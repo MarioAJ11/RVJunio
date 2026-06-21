@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cjuggleball01"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://scripts/juggling_ball.gd" id="2_script"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ball"]
+radius = 0.075
+
+[sub_resource type="SphereMesh" id="SphereMesh_ball"]
+radius = 0.075
+height = 0.15
+
+[node name="JuggleBall" instance=ExtResource("1_pickable")]
+mass = 0.1
+script = ExtResource("2_script")
+release_mode = 0
+ranged_grab_method = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_ball")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ball")

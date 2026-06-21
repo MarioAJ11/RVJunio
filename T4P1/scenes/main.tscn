@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://cf7ndsw88uiyy"]
+
+[ext_resource type="Script" uid="uid://ddjwuj80tfoyw" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="2_right_hand"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="3_left_hand"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_pickup"]
+[ext_resource type="PackedScene" uid="uid://cjuggleball01" path="res://objects/juggle_ball.tscn" id="5_ball"]
+[ext_resource type="Script" uid="uid://dwdgyrsp1i2c0" path="res://scripts/juggling_game.gd" id="6_game"]
+[ext_resource type="Script" uid="uid://oqrhtq7kuu3q" path="res://scripts/desktop_simulator.gd" id="7_desktop"]
+
+[sub_resource type="Environment" id="Environment_mr"]
+background_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(12, 0.05, 12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(12, 0.05, 12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+disable_receive_shadows = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_table"]
+size = Vector3(0.9, 0.05, 0.55)
+
+[sub_resource type="BoxMesh" id="BoxMesh_table"]
+size = Vector3(0.9, 0.05, 0.55)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
+albedo_color = Color(0.45, 0.28, 0.14, 0.92)
+metallic = 0.05
+roughness = 0.65
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o6xl0"]
+friction = 0.45
+bounce = 0.5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tipki"]
+friction = 0.45
+bounce = 0.5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_85g3d"]
+friction = 0.45
+bounce = 0.5
+
+[node name="Main" type="Node3D" unique_id=216767278]
+script = ExtResource("1_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1615028317]
+environment = SubResource("Environment_mr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=956918217]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 4, 0)
+shadow_enabled = true
+
+[node name="DesktopCamera" type="Camera3D" parent="." unique_id=2016478982]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.42, 0.05)
+fov = 70.0
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1632084315]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=987050027]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1253064571]
+visible = false
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="JugglingTable" type="StaticBody3D" parent="." unique_id=2034529800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775, -0.9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="JugglingTable" unique_id=1315948498]
+shape = SubResource("BoxShape3D_table")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="JugglingTable" unique_id=1741944364]
+mesh = SubResource("BoxMesh_table")
+surface_material_override/0 = SubResource("StandardMaterial3D_table")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1899287212]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=105272598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D" unique_id=1643315538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 1.2, -0.4)
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="XROrigin3D/LeftController" unique_id=865493272 instance=ExtResource("3_left_hand")]
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftController" unique_id=12842709 instance=ExtResource("4_pickup")]
+impulse_factor = 1.75
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=867337235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.2, -0.4)
+tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/RightController" unique_id=637701771 instance=ExtResource("2_right_hand")]
+
+[node name="FunctionPickup" parent="XROrigin3D/RightController" unique_id=447897707 instance=ExtResource("4_pickup")]
+impulse_factor = 1.75
+
+[node name="InteractiveObjects" type="Node3D" parent="." unique_id=708809288]
+
+[node name="BallRed" parent="InteractiveObjects" unique_id=1161288394 instance=ExtResource("5_ball")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.875, -0.9)
+physics_material_override = SubResource("PhysicsMaterial_o6xl0")
+ball_color = Color(0.92, 0.18, 0.15, 1)
+reset_delay = 1.2
+
+[node name="BallGreen" parent="InteractiveObjects" unique_id=1752547090 instance=ExtResource("5_ball")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, -0.86)
+physics_material_override = SubResource("PhysicsMaterial_tipki")
+ball_color = Color(0.15, 0.78, 0.28, 1)
+reset_delay = 1.2
+
+[node name="BallBlue" parent="InteractiveObjects" unique_id=835328156 instance=ExtResource("5_ball")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.875, -0.94)
+physics_material_override = SubResource("PhysicsMaterial_85g3d")
+ball_color = Color(0.2, 0.48, 0.95, 1)
+reset_delay = 1.2
+
+[node name="GameUI" type="Node3D" parent="." unique_id=399583248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, -1.25)
+
+[node name="TitleLabel" type="Label3D" parent="GameUI" unique_id=1565430864]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+billboard = 1
+modulate = Color(1, 1, 1, 0.98)
+text = "Malabares RA/RM"
+outline_size = 10
+
+[node name="StatsLabel" type="Label3D" parent="GameUI" unique_id=1432708864]
+unique_name_in_owner = true
+billboard = 1
+modulate = Color(0.92, 0.95, 1, 0.95)
+text = "Atrapadas: 0   Lanzadas: 0
+Racha: 0   Mejor: 0"
+font_size = 20
+outline_size = 8
+
+[node name="DesktopHUD" type="CanvasLayer" parent="." unique_id=1487390173]
+layer = 10
+visible = false
+
+[node name="Margin" type="MarginContainer" parent="DesktopHUD" unique_id=1573683552]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 312.0
+offset_bottom = 118.0
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="PanelContainer" parent="DesktopHUD/Margin" unique_id=1770757214]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="DesktopHUD/Margin/Panel" unique_id=204861315]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="DesktopHUD/Margin/Panel/VBox" unique_id=2037009946]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Malabares RA/RM"
+
+[node name="DesktopStatsLabel" type="Label" parent="DesktopHUD/Margin/Panel/VBox" unique_id=42931625]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Atrapadas: 0   Lanzadas: 0
+Racha: 0   Mejor: 0"
+
+[node name="DesktopSimulator" type="Node" parent="." unique_id=411201209]
+script = ExtResource("7_desktop")
+
+[node name="JugglingGame" type="Node3D" parent="." unique_id=1066433205]
+script = ExtResource("6_game")
