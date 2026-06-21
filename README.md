@@ -5,19 +5,6 @@ Repositorio local con los proyectos portables, videos de demostracion e instrucc
 **Autor:** Alguacil Juarez, Mario  
 **Asignatura:** Realidad Virtual y Aumentada
 
----
-
-## Estructura del repositorio
-
-```
-Repo/
-├── README.md          ← este archivo
-├── videos/            ← videos de demostracion
-├── T2P2/              ← Practica 2.2 (Unity)
-└── T4P1/              ← Practica 4.1 (Godot)
-```
-
----
 
 ## Practica 2.2 — Proyecto de Realidad Virtual (Unity)
 
@@ -45,7 +32,7 @@ Repo/
 
 ### Como abrir en otro ordenador
 
-1. Copia **`Repo/T2P2/`** al nuevo PC.
+1. Copia **`T2P2/`** al nuevo PC.
 2. Unity Hub → **Add** → carpeta `T2P2`.
 3. Espera importacion (regenera `Library/`).
 4. Abre **`Assets/Scenes/SampleScene.unity`**.
@@ -76,7 +63,7 @@ Guia: `Entregables/GUIA_TERMINAR_T2P2.md` (locomotion, teleport, snap, PDF, Git,
 ### Entrega asociada
 
 - PDF: `AlguacilJuarezMario_T2P2.pdf`
-- Codigo: `Repo/T2P2/` o GitHub
+- Codigo: `T2P2/` o GitHub
 
 ---
 
@@ -132,4 +119,4 @@ En Quest: agarrar con **grip**; la fuerza del lanzamiento la marca el **movimien
 ### Entrega asociada
 
 - PDF: `AlguacilJuarezMario_T4P1.pdf`
-- Codigo: esta carpeta `T4P1/`
+- Codigo: esta carpeta `T4P1/` o GitHub
