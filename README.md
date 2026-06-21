@@ -24,50 +24,59 @@ Repo/
 **Titulo:** RV-T2P2 — Sala de interacciones VR  
 **Motor:** Unity 6.3.18f1 (6000.3.18f1)  
 **Dispositivo:** Meta Quest 2 / 3  
-**SDK:** Meta XR All-in-One SDK
+**SDK:** Meta XR All-in-One SDK **203**  
+**Escena:** `Assets/Scenes/SampleScene.unity` (principal) · `Assets/VRInteractions.unity` (Meta grab)
 
 ### Video
 
 | Archivo | Descripcion |
 |---|---|
-| [videos/T2P2.mp4](videos/T2P2.mp4) | Demostracion del proyecto 2.2 |
+| [videos/T2P2.mp4](videos/T2P2.mp4) | PC o Quest: agarre, UI (tecla H), locomotion, teleport |
 
 ### Requisitos para ejecutar
 
 | Requisito | Version / nota |
 |---|---|
 | Unity Hub + Editor | **6000.3.18f1** (Unity 6.3) |
-| Meta XR SDK | Instalado via Package Manager (incluido en `Packages/`) |
-| Android Build Support | Para exportar APK a Quest |
-| Meta Quest Link o USB | Para probar en gafas (opcional) |
-| Meta XR Simulator | Para probar en PC sin gafas |
+| Meta XR SDK | 203 (incluido en `Packages/`) |
+| URP | Incluido en proyecto |
+| Android Build Support | Para exportar APK |
+| Meta XR Simulator | Opcional — probar interacciones Meta en PC |
 
 ### Como abrir en otro ordenador
 
-1. Copia la carpeta **`Repo/T2P2/`** completa al nuevo PC.
-2. Abre **Unity Hub** → **Add** → selecciona la carpeta `T2P2`.
-3. Unity regenerara `Library/` automaticamente (no se incluye a proposito).
-4. Espera a que termine la importacion de paquetes XR.
-5. Abre la escena principal desde `Assets/` (cuando este montada).
-6. **Build Settings:** plataforma Android, escena en build.
+1. Copia **`Repo/T2P2/`** al nuevo PC.
+2. Unity Hub → **Add** → carpeta `T2P2`.
+3. Espera importacion (regenera `Library/`).
+4. Abre **`Assets/Scenes/SampleScene.unity`**.
 
-### Probar sin gafas (simulador)
+La escena incluye `GameplayObjects` (mesa + objetos agarrables) y `GameplaySystems` (scripts).
 
-1. Cierra Meta Quest Link si esta abierto.
+### Probar en PC (grabar video, sin gafas)
+
+1. Abre `SampleScene.unity` → **Play**.
+2. **Clic en ventana Game** → WASD mover, ratón mirar.
+3. **Mantener clic** en objetos `Grab_*` para agarrar.
+4. **H** = mostrar/ocultar UI.
+
+Detalle: `Entregables/GRABAR_T2P2.md`
+
+### Probar con simulador Meta
+
+1. Cierra Meta Quest Link.
 2. **Meta → Meta XR Simulator → Activate**.
-3. **Project Settings → XR Plug-in Management → PC:** solo **OpenXR** activo.
-4. Play en el editor; usa la ventana del simulador.
+3. Abre `VRInteractions.unity` → Play.
+4. Tecla **H** = UI (**U** = grip, **B** = saltar en simulador).
+5. **Project Settings → XR → PC:** solo OpenXR.
 
-### Exportar a Quest
+### Completar entrega
 
-1. **File → Build Settings → Android → Switch Platform**.
-2. Conecta las gafas por USB (modo desarrollador).
-3. **Build and Run** o genera APK en carpeta `build/`.
+Guia: `Entregables/GUIA_TERMINAR_T2P2.md` (locomotion, teleport, snap, PDF, Git, video).
 
 ### Entrega asociada
 
 - PDF: `AlguacilJuarezMario_T2P2.pdf`
-- Codigo: esta carpeta `T2P2/`
+- Codigo: `Repo/T2P2/` o GitHub
 
 ---
 
